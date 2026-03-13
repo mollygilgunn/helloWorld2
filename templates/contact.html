@@ -1,0 +1,67 @@
+{%  extends "base.html" %}
+
+{%  block page_title %}
+Contact
+{% endblock %}
+
+{% block page_head %}
+Contact Me
+{% endblock %}
+
+{% block page_content %}
+
+{%  if form_submitted %}
+     <div class="col-12">
+            <h2>Thank you for completing the form!</h2>
+        </div>
+        <div class="col-md-6">
+            <p>First Name:</p>
+        </div>
+        <div class="col-md-6">
+             <p>{{ request.form.get('First_Name') }}</p>
+        </div>
+        <div class="col-md-6">
+            <p>Last Name:</p>
+        </div>
+        <div class="col-md-6">
+             <p>{{ request.form.get('Last_Name') }}</p>
+        </div>
+         <div class="col-md-6">
+            <p>Email:</p>
+        </div>
+        <div class="col-md-6">
+             <p>{{ request.form.get('email') }}</p>
+        </div>
+        <div class="col-md-6">
+            <p>Agree to be Contacted:</p>
+        </div>
+        <div class="col-md-6">
+             <p>{{ 'Yes' if request.form.get('agree_check') else 'No' }}</p>
+        </div>
+
+    <p><a href="{{ url_for('contact') }}">Complete form again</a></p>
+{% else %}
+<form class="row g-3" action="{{ url_for('contact') }}" method="post">
+    <div class="mb-3">
+    <label for="First_Name" class="form-label">First Name</label>
+    <input type="text" class="form-control" id="First_Name" name="First_Name">
+    </div>
+    <div class="mb-3">
+    <label for="Last_Name" class="form-label">Last Name</label>
+    <input type="text" class="form-control" id="Last_Name" name="Last_Name">
+    </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email Address</label>
+    <input type="email" class="form-control" id="email" name="email">
+  </div>
+   <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="agree_check" name="agree_check">
+    <label class="form-check-label" for="agree_check">I agree to be contacted</label>
+  </div>
+    <div class="col-12">
+       <button type="submit" class="btn btn-primary">Submit Form</button>
+    </div>
+</form>
+{%  endif %}
+{% endblock %}
+
