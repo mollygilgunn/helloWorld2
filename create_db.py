@@ -14,10 +14,10 @@ with app.app_context():
         print(each_major)
         a_major = Major(major=each_major)
         db.session.add(a_major)
-        db.session.commit()
+    db.session.commit()
 
         # Initial loading of users
-        users = [
+    users = [
              {'username': 'mgilgunn', 'email': 'mgilgunn@umd.edu', 'first_name': 'Molly', 'last_name': 'Gilgunn',
              'password': generate_password_hash('UMDJun227594$!', method='pbkdf2:sha256'), 'role': 'STUDENT'},
             {'username': 'manager', 'email': 'manager@umd.edu', 'first_name': 'Joe', 'last_name': 'King',
@@ -26,12 +26,12 @@ with app.app_context():
              'password': generate_password_hash('adminpw', method='pbkdf2:sha256'), 'role': 'ADMIN'}
         ]
 
-        for each_user in users:
-            print(f'{each_user["username"]} inserted into user')
-            a_user = User(username=each_user["username"], email=each_user["email"], first_name=each_user["first_name"],
-                          last_name=each_user["last_name"], password=each_user["password"], role=each_user["role"])
-            db.session.add(a_user)
-            db.session.commit()
+    for each_user in users:
+        print(f'{each_user["username"]} inserted into user')
+        a_user = User(username=each_user["username"], email=each_user["email"], first_name=each_user["first_name"],
+                        last_name=each_user["last_name"], password=each_user["password"], role=each_user["role"])
+        db.session.add(a_user)
+    db.session.commit()
 
     # Initial loading of students first_name, last_name, major_id, birth_date, is_honors, email
     students = [
@@ -49,6 +49,5 @@ with app.app_context():
                             major_id=each_student["major_id"], birth_date=each_student["birth_date"],
                             is_honors=each_student["is_honors"], email=each_student["email"])
         db.session.add(a_student)
-        db.session.commit()
-
+    db.session.commit()
 
